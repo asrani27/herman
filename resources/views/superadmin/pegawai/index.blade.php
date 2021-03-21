@@ -38,7 +38,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
+                  <table class="table table-hover text-nowrap table-sm table-striped">
                     <thead>
                       <tr>
                         <th>#</th>
@@ -55,18 +55,20 @@
                     @foreach ($data as $key => $item)
                           <tr>
                             <td>{{$key+ $data->firstItem()}}</td>
-                            <td>{{$item->nip}}<br />
-                            @if ($item->user_id == null)
-                              <a href="/superadmin/pegawai/createuser/{{$item->id}}" class="btn btn-xs btn-secondary"><i class="fas fa-key"></i> Create User</a>
-                            @else
-                                
-                            @endif
+                            <td>{{$item->nip}}
                             </td>
                             <td>{{$item->nama}}</td>
+                            <td>{{$item->skpd == null ? '-': $item->skpd->nama}}</td>
                             <td>
-                            <a href="/superadmin/pegawai/detail/{{$item->id}}" class="btn btn-sm btn-info" data-toggle="tooltip" title='lihat data'><i class="fas fa-eye"></i></a>
-                            <a href="/superadmin/pegawai/edit/{{$item->id}}" class="btn btn-sm btn-warning" data-toggle="tooltip" title='Edit data'><i class="fas fa-edit"></i></a>
-                            <a href="/superadmin/pegawai/delete/{{$item->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" title='Hapus data' onclick="return confirm('Yakin ingin di hapus?');"><i class="fas fa-trash"></i></a>
+                              @if ($item->user_id == null)
+                                <a href="/superadmin/pegawai/createuser/{{$item->id}}" class="btn btn-xs btn-secondary"><i class="fas fa-key"></i> Create User</a>
+                              @else
+                              <a href="/superadmin/pegawai/resetpass/{{$item->id}}" class="btn btn-xs btn-secondary"><i class="fas fa-key"></i> Reset Pass</a>
+                                  
+                              @endif
+                            <a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title='lihat data'><i class="fas fa-eye"></i></a>
+                            <a href="/superadmin/pegawai/edit/{{$item->id}}" class="btn btn-xs btn-warning" data-toggle="tooltip" title='Edit data'><i class="fas fa-edit"></i></a>
+                            <a href="/superadmin/pegawai/delete/{{$item->id}}" class="btn btn-xs btn-danger" data-toggle="tooltip" title='Hapus data' onclick="return confirm('Yakin ingin di hapus?');"><i class="fas fa-trash"></i></a>
                             </td>
                           </tr>
                       @endforeach

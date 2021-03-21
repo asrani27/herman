@@ -2,7 +2,7 @@
 <nav class="mt-2">
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <li class="nav-item">
-    <a href="/home/pegawai" class="nav-link">
+    <a href="/pegawai/home" class="nav-link">
         <i class="nav-icon fas fa-home"></i>
         <p>
         Beranda
@@ -10,34 +10,18 @@
     </a>
     </li>
     <li class="nav-item">
-    <a href="/pegawai/aktivitas" class="nav-link">
+    <a href="/pegawai/profil" class="nav-link">
         <i class="nav-icon fas fa-list-alt"></i>
         <p>
-        Jurnal Aktivitas
+        Profil
         </p>
     </a>
     </li>
     <li class="nav-item">
-    <a href="/pegawai/verifikasi" class="nav-link">
-        <i class="nav-icon fas fa-tasks"></i>
+    <a href="/pegawai/upload" class="nav-link">
+        <i class="nav-icon fas fa-file"></i>
         <p>
-        Validasi
-        </p>
-    </a>
-    </li>
-    <li class="nav-item">
-    <a href="/pegawai/riwayat" class="nav-link">
-        <i class="nav-icon fas fa-chart-line"></i>
-        <p>
-        Riwayat Jabatan
-        </p>
-    </a>
-    </li>
-    <li class="nav-item">
-    <a href="/pegawai/tpp" class="nav-link">
-        <i class="nav-icon fas fa-file-invoice"></i>
-        <p>
-        Laporan TPP
+        Upload
         </p>
     </a>
     </li>

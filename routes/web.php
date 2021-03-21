@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('/superadmin/pegawai/edit/{id}', [SuperadminController::class, 'editPegawai']);
     Route::post('/superadmin/pegawai/edit/{id}', [SuperadminController::class, 'updatePegawai']);
     Route::get('/superadmin/pegawai/delete/{id}', [SuperadminController::class, 'deletePegawai']);
+    Route::get('/superadmin/pegawai/createuser/{id}', [SuperadminController::class, 'createuser']);
+    Route::get('/superadmin/pegawai/resetpass/{id}', [SuperadminController::class, 'resetpass']);
     
     Route::get('/superadmin/setting/kategori/upload', [SuperadminController::class, 'kategori']);
     Route::get('/superadmin/setting/kategori/upload/add', [SuperadminController::class, 'addKategori']);
@@ -46,5 +48,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:pegawai']], function () {
-    Route::get('/pegawai/home', [PegawaiController::class, 'home']);    
+    Route::get('/pegawai/home', [PegawaiController::class, 'home']);  
+    Route::get('/pegawai/profil', [PegawaiController::class, 'profil']);    
+    Route::post('/pegawai/profil', [PegawaiController::class, 'changePegawai']);    
 });

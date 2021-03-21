@@ -28,7 +28,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>35</h3>
+                  <h3>{{countSkpd()}}</h3>
   
                   <p>Jumlah SKPD</p>
                 </div>
@@ -43,7 +43,7 @@
               <!-- small box -->
               <div class="small-box bg-purple">
                 <div class="inner">
-                  <h3>6000</h3>
+                  <h3>{{countPegawai()}}</h3>
   
                   <p>Jumlah PNS</p>
                 </div>

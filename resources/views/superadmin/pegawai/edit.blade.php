@@ -17,7 +17,7 @@
             <div class="col-lg-12 col-12">             
                 <div class="card card-info">
                     <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-graduation-cap"></i> Edit ASN</h3>
+                    <h3 class="card-title"><i class="fas fa-graduation-cap"></i> Edit PNS</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -38,43 +38,9 @@
                         <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Nama ASN</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="nama" value="{{$data->nama}}" placeholder="Agung Saptoto, M.Kom" required>
+                            <input type="text" class="form-control" name="nama" value="{{$data->nama}}" required>
                         </div>
                         </div>
-                        
-
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Tanggal lahir</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal_lahir"  value="{{$data->tanggal_lahir}}" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Eselon</label>
-                            <div class="col-sm-10">
-                                <select name="eselon_id" class="form-control">
-                                    <option value="">-pilih-</option>
-                                    @foreach (eselon() as $item)
-                                        <option value="{{$item->id}}" {{$item->id == $data->eselon_id ? 'selected': ''}}>{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Pangkat</label>
-                            <div class="col-sm-10">
-                                <select name="pangkat_id" class="form-control">
-                                    <option value="">-pilih-</option>
-                                    @foreach (pangkat() as $item)
-                                        <option value="{{$item->id}}" {{$item->id == $data->pangkat_id ? 'selected': ''}}>{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        
-                        
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">SKPD</label>
                             <div class="col-sm-10">

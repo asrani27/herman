@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Skpd;
+use App\Models\User;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Models\KategoriUpload;
@@ -15,11 +17,42 @@ class SuperadminController extends Controller
         return view('superadmin.home');
     }
 
+    public function createuser($id)
+    {
+        $data = Pegawai::find($id);
+        $role = Role::where('name','pegawai')->first();
+
+        $attr['name'] = $data->nama; 
+        $attr['username'] = $data->nip;
+        $attr['password'] = bcrypt('pnskapuas');
+        
+        $cek = User::where('username', $data->nip)->first();
+        if($cek == null){
+            $n = User::create($attr);
+            $data->update([
+                'user_id' => $n->id,
+            ]);
+            $n->roles()->attach($role);
+            toastr()->success('Username '.$data->nip.'<br />Password : pnskapuas');
+        }else{
+            toastr()->error('Username Sudah Ada');
+        }
+        return back();
+    }
+
+    public function resetpass($id)
+    {
+        Pegawai::find($id)->user->update([
+            'password' => bcrypt('pnskapuas')
+        ]);
+        toastr()->success('Password : pnskapuas');
+        return back();
+    }
+    
     public function profil()
     {
         return view('superadmin.profil');
     }
-
     public function changeSuperadmin(Request $req)
     {
         if($req->password != $req->password2){
@@ -89,6 +122,20 @@ class SuperadminController extends Controller
     
     public function storePegawai(Request $req)
     {
+        $messages = [
+            'numeric' => 'Inputan Harus Angka',
+            'min'     => 'Harus 18 Digit',
+            'unique'  => 'NIP sudah Ada',
+        ];
+
+        $rules = [
+            'nip' =>  'unique:pegawai|min:18|numeric',
+            'nama' => 'required'
+        ];
+        $req->validate($rules, $messages);
+        
+        $req->flash();
+
         Pegawai::create($req->all());
         toastr()->success('Pegawai Berhasil Di simpan');
         return redirect('/superadmin/pegawai');
@@ -102,6 +149,19 @@ class SuperadminController extends Controller
     
     public function updatePegawai(Request $req, $id)
     {
+        $messages = [
+            'numeric' => 'Inputan Harus Angka',
+            'min'     => 'Harus 18 Digit',
+            'unique'  => 'NIP sudah Ada',
+        ];
+
+        $rules = [
+            'nip' =>  '|min:18|numeric|unique:pegawai,nip,'.$id,
+            'nama' => 'required'
+        ];
+        $req->validate($rules, $messages);
+        
+        $req->flash();
         Pegawai::find($id)->update($req->all());
         toastr()->success('Pegawai Berhasil Di Update');
         return redirect('/superadmin/pegawai');
