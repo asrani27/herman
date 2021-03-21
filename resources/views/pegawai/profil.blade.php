@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 @endpush
 @section('title')
-    SUPERADMIN
+    PROFIL PEGAWAI
 @endsection
 @section('content')
 <div class="row">
@@ -17,7 +17,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-info">
                     <h3 class="widget-user-username">{{strtoupper(Auth::user()->name)}}</h3>
-                    <h5 class="widget-user-desc">KABUPATEN KAPUAS</h5>
+                    <h5 class="widget-user-desc">NIP. {{strtoupper(Auth::user()->username)}}</h5>
                     </div>
                     <div class="widget-user-image">
                     <img class="img-circle elevation-2" src="/theme/logo.png" alt="User Avatar">

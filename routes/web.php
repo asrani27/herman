@@ -50,5 +50,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 Route::group(['middleware' => ['auth', 'role:pegawai']], function () {
     Route::get('/pegawai/home', [PegawaiController::class, 'home']);  
     Route::get('/pegawai/profil', [PegawaiController::class, 'profil']);    
-    Route::post('/pegawai/profil', [PegawaiController::class, 'changePegawai']);    
+    Route::post('/pegawai/profil', [PegawaiController::class, 'changePegawai']);  
+    
+    Route::get('/pegawai/upload', [PegawaiController::class, 'upload']);      
+    Route::get('/pegawai/upload/add/{kategori_id}', [PegawaiController::class, 'addUpload']);      
 });
