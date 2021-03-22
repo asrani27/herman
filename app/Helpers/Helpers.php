@@ -18,6 +18,18 @@ function pegawai()
     return Pegawai::paginate(10);
 }
 
+
+function countUser()
+{
+    return Pegawai::where('user_id', '!=', null)->get()->count();
+}
+
+function countUserYet()
+{
+   return Pegawai::where('user_id', null)->get()->count();
+}
+
+
 function skpd()
 {
     return Skpd::get();

@@ -19,10 +19,11 @@
               <a href="/superadmin/pegawai/import" class="btn btn-sm btn-warning"><i class="fas fa-upload"></i> Import Data PNS</a>
               <a href="/superadmin/pegawai/createuser" class="btn btn-sm bg-purple"><i class="fas fa-key"></i> Create User & Pass PNS</a>
               <a href="/superadmin/pegawai" class="btn btn-sm bg-info"><i class="fas fa-recycle"></i> Refresh</a>
+              <a href="/superadmin/download" class="btn btn-sm bg-danger"><i class="fas fa-download"></i> Download All File Upload</a>
               <br/><br/>
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Total PNSKABUPATEN KAPUAS : Orang</h3>
+                  <h3 class="card-title">Total PNS KABUPATEN KAPUAS : {{countPegawai()}} Orang, user di buat : {{countUser()}},  user belum di buat : {{countUserYet()}}</h3>
   
                   <div class="card-tools">
                     <form method="get" action="/superadmin/pegawai/search">
@@ -73,12 +74,17 @@
                           </tr>
                       @endforeach
                     </tbody>
+                    <tfoot>
+                      <tr>
+                        <td></td>
+                      </tr>
+                    </tfoot>
                   </table>
+                  {{--   --}}
                 </div>
                 <!-- /.card-body -->
-              </div>
+              </div>{{$data->links()}}
               <!-- /.card -->
-            {{$data->links()}} 
             </div>
         </div>
     </div>

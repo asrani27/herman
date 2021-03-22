@@ -35,7 +35,7 @@
                         <div class="col-4 border-right">
                         <div class="description-block">
                             <h5 class="description-header">CONTACT</h5>
-                            <span class="description-text">0878 1234 1234</span>
+                            <span class="description-text">-</span>
                         </div>
                         <!-- /.description-block -->
                         </div>

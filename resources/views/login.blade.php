@@ -24,7 +24,7 @@
     <div class="card-body login-card-body">
         <div class="text-center">
         <img src="/theme/logo.png" width="100px"><br />
-        <b></b>SIMPEG <br />KABUPATEN KAPUAS
+        <b></b>SISTEM INFORMASI KEPEGAWAIAN <br />KABUPATEN KAPUAS
         </div>
           
       <form action="/login" method="post">

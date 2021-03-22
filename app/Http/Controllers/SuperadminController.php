@@ -2,19 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use File;
+use Exception;
+use ZipArchive;
 use App\Models\Role;
 use App\Models\Skpd;
 use App\Models\User;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use App\Imports\PegawaiImport;
 use App\Models\KategoriUpload;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use Madnest\Madzipper\Facades\Madzipper;
 
 class SuperadminController extends Controller
 {
     public function home()
     {
         return view('superadmin.home');
+    }
+
+    public function import()
+    {
+        return view('superadmin.pegawai.import');
+    }
+
+    public function storeImport(Request $req)
+    {
+        $messages = [
+            'mimes' => 'File harus Excel',
+            'max' => 'Maximal 15 MB'
+        ];
+
+        $rules = [
+            'file' =>  'mimes:xls,xlsx|required|max:20000',
+        ];
+        
+        $req->validate($rules, $messages);
+        
+        $req->flash();
+
+        $collect = (new PegawaiImport)->toCollection($req->file('file'))->first();
+        $map = $collect->map(function($item){
+            if(strlen($item[3]) == 18 ){
+                $attr['nama'] = $item[1];
+                $attr['nip'] = $item[3];
+
+                $cek = Pegawai::where('nip', $attr['nip'])->first();
+                if($cek == null){
+                    Pegawai::create($attr);
+                }else{
+
+                }
+            }else{
+                
+            }
+            return $item;
+        });
+        toastr()->success('Selesai Di Import');
+        return redirect('/superadmin/pegawai');
     }
 
     public function createuser($id)
@@ -38,6 +86,38 @@ class SuperadminController extends Controller
             toastr()->error('Username Sudah Ada');
         }
         return back();
+    }
+
+    
+    public function createalluser()
+    {
+        try{
+            $data = Pegawai::where('user_id', null)->get();
+            $role = Role::where('name','pegawai')->first();
+            foreach($data as $key => $item)
+            {
+                $attr['name'] = $item->nama; 
+                $attr['username'] = $item->nip;
+                $attr['password'] = bcrypt('pnskapuas');
+    
+                $cek = User::where('username', $item->nip)->first();
+                if($cek == null){
+                    $n = User::create($attr);
+                    $item->update([
+                        'user_id' => $n->id,
+                    ]);
+                    $n->roles()->attach($role);
+                }else{
+                } 
+            }
+            toastr()->success('User Berhasil Di create <br /> Username NIP <br> Password pnskapuas');
+            return back();
+        }catch(\Exception $e){
+            
+            $data = Pegawai::where('user_id', '!=', null)->get();
+            toastr()->error('Execution Time,Server Ga Kuat, <br /> User berhasil di create'.$data->count());
+            return back();
+        }
     }
 
     public function resetpass($id)
@@ -119,7 +199,7 @@ class SuperadminController extends Controller
     {
         return view('superadmin.pegawai.create');
     }
-    
+
     public function storePegawai(Request $req)
     {
         $messages = [
@@ -220,5 +300,20 @@ class SuperadminController extends Controller
             toastr()->error('Kategori Gagal Di Hapus Karena Terkait Dengan Data Lain');
             return back();
         }
+    }
+    
+    public function download()
+    {
+        $data = Pegawai::pluck('nip');
+        foreach($data as $key => $item){
+            $files = glob('storage/'.$item);
+            Madzipper::make('storage/download/'.$item.'.zip')->add($files)->close();
+        }
+        
+        $files = glob('storage/download/*');
+        Madzipper::make('storage/download.zip')->add($files)->close();
+
+        $name = 'DokumenPNS'.date('-d-m-Y-h-i-s');
+        return Storage::download('/public/download.zip', $name);
     }
 }

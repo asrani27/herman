@@ -19,6 +19,7 @@ Route::get('/logout', function(){
 
 Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('/superadmin/home', [SuperadminController::class, 'home']);
+    Route::get('/superadmin/download', [SuperadminController::class, 'download']);
     Route::get('/superadmin/profil', [SuperadminController::class, 'profil']);
     Route::post('/superadmin/profil', [SuperadminController::class, 'changeSuperadmin']);
 
@@ -36,7 +37,10 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::post('/superadmin/pegawai/edit/{id}', [SuperadminController::class, 'updatePegawai']);
     Route::get('/superadmin/pegawai/delete/{id}', [SuperadminController::class, 'deletePegawai']);
     Route::get('/superadmin/pegawai/createuser/{id}', [SuperadminController::class, 'createuser']);
+    Route::get('/superadmin/pegawai/createuser', [SuperadminController::class, 'createalluser']);
     Route::get('/superadmin/pegawai/resetpass/{id}', [SuperadminController::class, 'resetpass']);
+    Route::get('/superadmin/pegawai/import', [SuperadminController::class, 'import']);
+    Route::post('/superadmin/pegawai/import', [SuperadminController::class, 'storeImport']);
     
     Route::get('/superadmin/setting/kategori/upload', [SuperadminController::class, 'kategori']);
     Route::get('/superadmin/setting/kategori/upload/add', [SuperadminController::class, 'addKategori']);
@@ -53,5 +57,7 @@ Route::group(['middleware' => ['auth', 'role:pegawai']], function () {
     Route::post('/pegawai/profil', [PegawaiController::class, 'changePegawai']);  
     
     Route::get('/pegawai/upload', [PegawaiController::class, 'upload']);      
-    Route::get('/pegawai/upload/add/{kategori_id}', [PegawaiController::class, 'addUpload']);      
+    Route::get('/pegawai/upload/add/{kategori_id}', [PegawaiController::class, 'addUpload']); 
+    Route::post('/pegawai/upload/add/{kategori_id}', [PegawaiController::class, 'storeUpload']);     
+    Route::get('/pegawai/upload/delete/{id}', [PegawaiController::class, 'deleteFile']);       
 });
