@@ -92,7 +92,7 @@ class SuperadminController extends Controller
     public function createalluser()
     {
         try{
-            $data = Pegawai::where('user_id', null)->take(500)->get();
+            $data = Pegawai::where('user_id', null)->take(300)->get();
             
             $role = Role::where('name','pegawai')->first();
             foreach($data as $key => $item)
