@@ -92,7 +92,8 @@ class SuperadminController extends Controller
     public function createalluser()
     {
         try{
-            $data = Pegawai::where('user_id', null)->get();
+            $data = Pegawai::where('user_id', null)->take(500)->get();
+            
             $role = Role::where('name','pegawai')->first();
             foreach($data as $key => $item)
             {
@@ -110,7 +111,8 @@ class SuperadminController extends Controller
                 }else{
                 } 
             }
-            toastr()->success('User Berhasil Di create <br /> Username NIP <br> Password pnskapuas');
+            $count = Pegawai::where('user_id', null)->get()->count();
+            toastr()->success('User Berhasil Di create <br /> Username NIP <br> Password pnskapuas', 'Execution Time Berakhir <br> Masih ada '.$count.' User Belum Dibuat');
             return back();
         }catch(\Exception $e){
             
