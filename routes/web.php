@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('/superadmin/pegawai/resetpass/{id}', [SuperadminController::class, 'resetpass']);
     Route::get('/superadmin/pegawai/import', [SuperadminController::class, 'import']);
     Route::post('/superadmin/pegawai/import', [SuperadminController::class, 'storeImport']);
+    Route::get('/superadmin/pegawai/search', [SuperadminController::class, 'searchPegawai']);
     
     Route::get('/superadmin/setting/kategori/upload', [SuperadminController::class, 'kategori']);
     Route::get('/superadmin/setting/kategori/upload/add', [SuperadminController::class, 'addKategori']);

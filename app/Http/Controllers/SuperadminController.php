@@ -29,6 +29,15 @@ class SuperadminController extends Controller
         return view('superadmin.pegawai.import');
     }
 
+    public function searchPegawai()
+    {
+        $search = request()->get('search');
+        $data = Pegawai::where('nip','LIKE', '%'.$search.'%')->orWhere('nama','LIKE', '%'.$search.'%')->paginate(10);
+        
+        request()->flash();
+        return view('superadmin.pegawai.index',compact('data'));
+    }
+
     public function storeImport(Request $req)
     {
         $messages = [
@@ -92,7 +101,7 @@ class SuperadminController extends Controller
     public function createalluser()
     {
         try{
-            $data = Pegawai::where('user_id', null)->take(300)->get();
+            $data = Pegawai::where('user_id', null)->take(500)->get();
             
             $role = Role::where('name','pegawai')->first();
             foreach($data as $key => $item)

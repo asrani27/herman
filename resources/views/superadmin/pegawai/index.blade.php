@@ -67,7 +67,7 @@
                               <a href="/superadmin/pegawai/resetpass/{{$item->id}}" class="btn btn-xs btn-secondary"><i class="fas fa-key"></i> Reset Pass</a>
                                   
                               @endif
-                            <a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title='lihat data'><i class="fas fa-eye"></i></a>
+                            {{-- <a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title='lihat data'><i class="fas fa-eye"></i></a> --}}
                             <a href="/superadmin/pegawai/edit/{{$item->id}}" class="btn btn-xs btn-warning" data-toggle="tooltip" title='Edit data'><i class="fas fa-edit"></i></a>
                             <a href="/superadmin/pegawai/delete/{{$item->id}}" class="btn btn-xs btn-danger" data-toggle="tooltip" title='Hapus data' onclick="return confirm('Yakin ingin di hapus?');"><i class="fas fa-trash"></i></a>
                             </td>
