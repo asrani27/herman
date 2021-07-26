@@ -86,10 +86,14 @@ class PegawaiController extends Controller
         return redirect('pegawai/upload');
     }
 
+    public function viewFile($nip, $filename)
+    {
+        return response()->file('storage/'.$nip.'/'.$filename);
+    }
     public function deleteFile($id)
     {
-        $d = Upload::find($id);
-        $nip = Auth::user()->pegawai->nip;
+        $d    = Upload::find($id);
+        $nip  = Auth::user()->pegawai->nip;
         $path = '/public/'.$nip.'/'.$d->file;
         Storage::delete($path);
         $d->delete();

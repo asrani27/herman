@@ -56,6 +56,7 @@
                                         <td>{{$item2->file}}</td>
                                         <td>
                                             <a href="/pegawai/upload/delete/{{$item2->id}}" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></a>
+                                            {{-- <a href="/pegawai/view/{{Auth::user()->username}}/{{$item2->file}}" class="btn btn-xs btn-success" target="_blank"><i class="fas fa-eye"></i> Lihat</a> --}}
                                             <a href="/storage/{{Auth::user()->username}}/{{$item2->file}}" class="btn btn-xs btn-info" target="_blank"><i class="fas fa-download"></i> Download</a>
                                         </td>
                                         <td>{{$item2->created_at}}</td>

@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ContohController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\SuperadminController;
 
 Route::get('/', [LoginController::class, 'index']);
+//Route::get('/', [ContohController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/login', function(){
     return redirect('/');
@@ -60,5 +62,6 @@ Route::group(['middleware' => ['auth', 'role:pegawai']], function () {
     Route::get('/pegawai/upload', [PegawaiController::class, 'upload']);      
     Route::get('/pegawai/upload/add/{kategori_id}', [PegawaiController::class, 'addUpload']); 
     Route::post('/pegawai/upload/add/{kategori_id}', [PegawaiController::class, 'storeUpload']);     
-    Route::get('/pegawai/upload/delete/{id}', [PegawaiController::class, 'deleteFile']);       
+    Route::get('/pegawai/upload/delete/{id}', [PegawaiController::class, 'deleteFile']);         
+    Route::get('/pegawai/view/{nip}/{filename}', [PegawaiController::class, 'viewFile']);       
 });

@@ -24,7 +24,7 @@
     <div class="card-body login-card-body">
         <div class="text-center">
         <img src="/theme/logo.png" width="100px"><br />
-        <b></b>SISTEM INFORMASI KEPEGAWAIAN <br />KABUPATEN KAPUAS
+        <b></b>SISTEM INFORMASI KEPEGAWAIAN <br />KOTA BANJARMASIN
         </div>
           
       <form action="/login" method="post">
@@ -49,6 +49,8 @@
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Log In</button>
           </div>
+          
+
           <!-- /.col -->
         </div>
       </form>
@@ -56,6 +58,7 @@
     <!-- /.login-card-body -->
   </div>
 </div>
+
 <!-- /.login-box -->
 
 <!-- jQuery -->
@@ -64,6 +67,7 @@
 <script src="/theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/theme/dist/js/adminlte.min.js"></script>
+
 @toastr_js
 @toastr_render
 
